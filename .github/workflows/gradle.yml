@@ -39,7 +39,7 @@ jobs:
         pushd ExoPlayer
         ./gradlew :extension-ffmpeg:assembleRelease
     - name: Upload artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: extension-ffmpeg-release.aar
         path: ExoPlayer/extensions/ffmpeg/buildout/outputs/aar
