@@ -6,7 +6,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      ANDROID_NDK: "21.4.7075529"
+      # ANDROID_NDK: "21.4.7075529"
+      ANDROID_NDK: "r26b"
       EXOPLAYER: "release"
       FFMPEG: "release/6.0"
     steps:
@@ -30,12 +31,13 @@ jobs:
         git clone -b $EXOPLAYER https://github.com/androidx/media
         export FFMPEG_MODULE_PATH="$PWD/media/libraries/decoder_ffmpeg/src/main"
         export HOST_PLATFORM="linux-x86_64"
+        export ANDROID_ABI=23
         # export ENABLED_DECODERS=(vorbis opus flac alac pcm_mulaw pcm_alaw mp3 amrnb amrwb aac ac3 eac3 dca mlp truehd)
         export ENABLED_DECODERS=(alac aac h264)
         pushd $FFMPEG_MODULE_PATH/jni
         git clone -b $FFMPEG git://source.ffmpeg.org/ffmpeg
         rm -rf /usr/local/bin/cmake
-        ./build_ffmpeg.sh $FFMPEG_MODULE_PATH $NDK_PATH $HOST_PLATFORM ${ENABLED_DECODERS[@]}
+        ./build_ffmpeg.sh $FFMPEG_MODULE_PATH $NDK_PATH $HOST_PLATFORM $ANDROID_ABI ${ENABLED_DECODERS[@]}
         popd
         pushd ExoPlayer
         ./gradlew :extension-ffmpeg:assembleRelease
