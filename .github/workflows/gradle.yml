@@ -33,13 +33,14 @@ jobs:
         export HOST_PLATFORM="linux-x86_64"
         export ANDROID_ABI=23
         # export ENABLED_DECODERS=(vorbis opus flac alac pcm_mulaw pcm_alaw mp3 amrnb amrwb aac ac3 eac3 dca mlp truehd)
-        export ENABLED_DECODERS=(alac aac h264)
+        export ENABLED_DECODERS=(alac aac)
         pushd $FFMPEG_MODULE_PATH/jni
         git clone -b $FFMPEG git://source.ffmpeg.org/ffmpeg
+        export FFMPEG_PATH=$PWD/ffmpeg
         rm -rf /usr/local/bin/cmake
         ./build_ffmpeg.sh $FFMPEG_MODULE_PATH $NDK_PATH $HOST_PLATFORM $ANDROID_ABI ${ENABLED_DECODERS[@]}
         popd
-        pushd media
+        pushd $EXOPLAYER
         ./gradlew lib-decoder-ffmpeg:assembleRelease
     - name: Upload artifact
       uses: actions/upload-artifact@v4
