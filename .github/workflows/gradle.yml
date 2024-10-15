@@ -38,9 +38,9 @@ jobs:
         git clone -b $FFMPEG git://source.ffmpeg.org/ffmpeg
         rm -rf /usr/local/bin/cmake
         ./build_ffmpeg.sh $FFMPEG_MODULE_PATH $NDK_PATH $HOST_PLATFORM $ANDROID_ABI ${ENABLED_DECODERS[@]}
-        # popd
-        # pushd media
-        # ./gradlew :extension-ffmpeg:assembleRelease
+        popd
+        pushd media
+        ./gradlew lib-decoder-ffmpeg:assembleRelease
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
