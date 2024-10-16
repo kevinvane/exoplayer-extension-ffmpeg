@@ -1,4 +1,4 @@
-name: CI
+name: BUILD_MEDIA_FFMPEG
 
 on: workflow_dispatch
 
@@ -8,7 +8,7 @@ jobs:
     env:
       # ANDROID_NDK: "21.4.7075529"
       ANDROID_NDK: "26.3.11579264"
-      MEDIA3: "release"
+      MEDIA3: "release-1.5.0-alpha01"
       FFMPEG: "release/6.0"
     steps:
     - uses: actions/checkout@v4
@@ -29,10 +29,12 @@ jobs:
         echo y | sdkmanager --update >> log.txt
         echo y | sdkmanager --install "ndk;$ANDROID_NDK" >> log.txt
         git clone -b $MEDIA3 https://github.com/androidx/media
+        echo 'use media3 branch $MEDIA3'
         pushd media
         export MEDIA3_PATH="$PWD"
         export FFMPEG_MODULE_PATH="$PWD/libraries/decoder_ffmpeg/src/main"
         git checkout b930b40a16c06318e43c81771fa2b1024bdb3f29
+        echo 'checkout b930b40a16c06318e43c81771fa2b1024bdb3f29'
         popd
         export HOST_PLATFORM="linux-x86_64"
         export ANDROID_ABI=23
