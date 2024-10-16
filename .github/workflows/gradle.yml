@@ -19,8 +19,8 @@ jobs:
         distribution: 'adopt'
     - name: Build with Gradle
       run: |
-        wget -q https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip
-        unzip -qq commandlinetools-linux-7583922_latest.zip
+        wget -q https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
+        unzip -qq commandlinetools-linux-11076708_latest.zip
         mkdir -p android-sdk/cmdline-tools && mv cmdline-tools $_/latest
         export ANDROID_HOME=$PWD/android-sdk
         export ANDROID_SDK_ROOT=$ANDROID_HOME
@@ -29,7 +29,7 @@ jobs:
         echo y | sdkmanager --update >> log.txt
         echo y | sdkmanager --install "ndk;$ANDROID_NDK" >> log.txt
         git clone -b $MEDIA3 https://github.com/androidx/media
-        echo 'use media3 branch $MEDIA3'
+        echo $MEDIA3
         pushd media
         export MEDIA3_PATH="$PWD"
         export FFMPEG_MODULE_PATH="$PWD/libraries/decoder_ffmpeg/src/main"
@@ -43,6 +43,7 @@ jobs:
         pushd $FFMPEG_MODULE_PATH/jni
         git clone -b $FFMPEG git://source.ffmpeg.org/ffmpeg
         export FFMPEG_PATH=$PWD/ffmpeg
+        ln -s $FFMPEG_PATH ffmpeg
         rm -rf /usr/local/bin/cmake
         ./build_ffmpeg.sh $FFMPEG_MODULE_PATH $NDK_PATH $HOST_PLATFORM $ANDROID_ABI ${ENABLED_DECODERS[@]}
         popd
