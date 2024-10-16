@@ -39,7 +39,7 @@ jobs:
         export MEDIA3_PATH="$PWD/media"
         export FFMPEG_MODULE_PATH="$PWD/media/libraries/decoder_ffmpeg/src/main"
         export HOST_PLATFORM="linux-x86_64"
-        export ANDROID_ABI=23
+        export ANDROID_ABI=21
         # export ENABLED_DECODERS=(vorbis opus flac alac pcm_mulaw pcm_alaw mp3 amrnb amrwb aac ac3 eac3 dca mlp truehd)
         export ENABLED_DECODERS=(alac aac)
         pushd $FFMPEG_MODULE_PATH/jni
