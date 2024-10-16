@@ -55,5 +55,5 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
-        name: extension-ffmpeg-release.aar
-        path: /media/libraries/decoder_ffmpeg/buildout/outputs/aar
+        name: lib-decoder-ffmpeg-release.aar
+        path: $MEDIA3_PATH/libraries/decoder_ffmpeg/buildout/outputs/aar
