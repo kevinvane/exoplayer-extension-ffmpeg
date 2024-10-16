@@ -6,7 +6,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      ANDROID_NDK: "27.1.12297006"
+      ANDROID_NDK: "25.1.8937393"
       MEDIA3: "release-1.5.0-alpha01"
       FFMPEG: "release/6.0"
     steps:
