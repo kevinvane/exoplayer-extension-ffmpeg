@@ -28,6 +28,9 @@ jobs:
         echo y | sdkmanager --update >> log.txt
         echo y | sdkmanager --install "ndk;$ANDROID_NDK" >> log.txt
         git clone -b $MEDIA3 https://github.com/androidx/media
+        pushd media
+        git checkout b930b40a16c06318e43c81771fa2b1024bdb3f29
+        popd
         export MEDIA3_PATH="$PWD/media"
         export FFMPEG_MODULE_PATH="$PWD/media/libraries/decoder_ffmpeg/src/main"
         export HOST_PLATFORM="linux-x86_64"
