@@ -1,6 +1,11 @@
 name: BUILD_MEDIA_FFMPEG
 
-on: workflow_dispatch
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+  
 
 jobs:
   build:
